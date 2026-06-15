@@ -4,7 +4,8 @@ import { caseManifestV2Schema, type CaseManifestV2 } from "./schemas.ts";
 import type { PublicCaseManifest, EntityDef, FactDef, QuestionDef } from "@shared/types";
 import { config } from "../config.ts";
 
-const scriptDir = join(new URL("../..", import.meta.url).pathname, config.game.script_dir);
+// 【已修复】使用 import.meta.dir 自动处理中文字符解码及 Windows 盘符前导斜杠
+const scriptDir = join(import.meta.dir, "../..", config.game.script_dir);
 
 function loadManifest(): CaseManifestV2 {
   const path = join(scriptDir, "manifest.json");
