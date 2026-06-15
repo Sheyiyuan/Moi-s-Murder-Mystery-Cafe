@@ -2,7 +2,8 @@ import { readFileSync } from "node:fs";
 import { join } from "node:path";
 import { z } from "zod";
 
-const configDir = new URL(".", import.meta.url).pathname;
+// 【已修复】在 Windows/macOS/Linux 下，import.meta.dir 均能返回正确的本地绝对路径
+const configDir = import.meta.dir;
 const configPath = join(configDir, "..", "config.toml");
 
 const serverSchema = z.object({
